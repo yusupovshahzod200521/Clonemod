@@ -184,6 +184,18 @@ public class CloneMod {
         c.setBodyIndex(idx);
         w.addFreshEntity(c);
     }
+        static void spawnBodyEntity(ServerWorld w, UUID owner, int idx, double x, double y, double z, float yaw, ServerPlayerEntity src) {
+        CloneBodyEntity c = new CloneBodyEntity(BODY.get(), w);
+        c.moveTo(x, y, z, yaw, 0.0F);
+        c.yHeadRot = yaw;
+        c.setOwnerId(owner);
+        c.setBodyIndex(idx);
+        for (net.minecraft.inventory.EquipmentSlotType slot : net.minecraft.inventory.EquipmentSlotType.values()) {
+            c.setItemSlot(slot, src.getItemBySlot(slot).copy());
+            c.setDropChance(slot, 0.0F);
+        }
+        w.addFreshEntity(c);
+    }
 
     static float takeBodyEntity(ServerWorld w, double x, double y, double z, UUID owner, int idx) {
         float hp = -1.0F;
