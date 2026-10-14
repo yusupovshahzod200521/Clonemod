@@ -278,7 +278,7 @@ public class CloneMod {
         CompoundNBT snap = snapshot(p);
         d.put("b" + cur, snap);
         d.putInt("s" + cur, 1);
-        spawnBodyEntity(p.getLevel(), p.getUUID(), cur, p.getX(), p.getY(), p.getZ(), p.yRot);
+        spawnBodyEntity(p.getLevel(), p.getUUID(), cur, p.getX(), p.getY(), p.getZ(), p.yRot, p);
 
         // Tanlangan tanaga o'tamiz
         enterBody(p, d.getCompound("b" + slot), slot);
