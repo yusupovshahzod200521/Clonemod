@@ -1,5 +1,7 @@
 name: Build
+
 on: [push, workflow_dispatch]
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -9,11 +11,13 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
-      - uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-version: 7.6.4
-      - run: |
-          gradle build --no-daemon > log.txt 2>&1 || { grep -E "Caused by|error:|What went wrong|Could not|Exception" log.txt | head -40; exit 1; }
+      - name: Setup Gradle
+        run: |
+          curl -L https://services.gradle.org/distributions/gradle-8.8-bin.zip -o gradle.zip
+          unzip gradle.zip
+          ./gradle-8.8/bin/gradle wrapper
+      - name: Build
+        run: ./gradlew build --no-daemon
       - uses: actions/upload-artifact@v4
         with:
           name: CloneMod
