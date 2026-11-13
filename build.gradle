@@ -17,7 +17,7 @@ archivesBaseName = 'clonemod'
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 minecraft {
-    mappings channel: 'official', version: '1.21.1'
+    mappings channel: 'official', version: '1.21.11'
     runs {
         client {
             workingDirectory project.file('run')
@@ -30,5 +30,5 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.21.1-61.0.0'
+    minecraft 'net.minecraftforge:forge:1.21.11-61.0.0'
 }
