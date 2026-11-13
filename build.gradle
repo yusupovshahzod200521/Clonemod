@@ -1,0 +1,43 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '6.0.+', changing: true
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'eclipse'
+
+version = '1.0'
+group = 'com.clonemod'
+archivesBaseName = 'clonemod'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+minecraft {
+    mappings channel: 'official', version: '1.21.11'
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'DEBUG'
+        }
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'DEBUG'
+        }
+    }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.21.11-61.0.8'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
